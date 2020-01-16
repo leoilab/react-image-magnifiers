@@ -22,6 +22,7 @@ const SideBySideRenderer = props => {
     transitionSpeedInPlace,
     renderOverlay,
     cursorStyle,
+    onImageError,
     onImageLoad,
     onLargeImageLoad,
     onLoadRefresh
@@ -118,6 +119,7 @@ const SideBySideRenderer = props => {
         }}
         src={imageSrc}
         alt={imageAlt}
+        onImageError={onImageError}
         onImageLoad={onImageLoad}
         onLoadRefresh={onLoadRefresh}
       />

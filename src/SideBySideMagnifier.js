@@ -21,6 +21,7 @@ const SideBySideMagnifier = props => {
     renderOverlay,
     className,
     style,
+    onImageError,
     onImageLoad,
     onLargeImageLoad
   } = props;
@@ -45,6 +46,7 @@ const SideBySideMagnifier = props => {
         transitionSpeedInPlace={transitionSpeedInPlace}
         renderOverlay={renderOverlay}
         cursorStyle={cursorStyle}
+        onImageError={onImageError}
         onImageLoad={onImageLoad}
         onLargeImageLoad={onLargeImageLoad}
       />
@@ -71,6 +73,7 @@ SideBySideMagnifier.propTypes = {
   renderOverlay: PropTypes.func,
   className: PropTypes.string,
   style: PropTypes.object,
+  onImageError: PropTypes.func,
   onImageLoad: PropTypes.func,
   onLargeImageLoad: PropTypes.func
 };
@@ -84,6 +87,7 @@ SideBySideMagnifier.defaultProps = {
   cursorStyle: "crosshair",
   transitionSpeed: 0.4,
   transitionSpeedInPlace: 0.4,
+  onImageError: utils.noop,
   onImageLoad: utils.noop,
   onLargeImageLoad: utils.noop
 };

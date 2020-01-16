@@ -2,16 +2,17 @@ import React from "react";
 import utils from "./utils";
 
 const Image = React.forwardRef(function(props, ref) {
-  const { onImageLoad, onLoadRefresh, src, alt, ...otherProps } = props;
+  const { onImageError, onImageLoad, onLoadRefresh, src, alt, ...otherProps } = props;
 
   const [imageIdx, setImageIdx] = React.useState(0);
   const imageErrorRef = React.useRef(false);
   const imageArr = src.constructor === Array ? src : [src];
+  const imageSrc = imageArr[imageIdx];
 
   return (
     <img
       ref={ref}
-      src={imageArr[imageIdx]}
+      src={imageSrc}
       alt={alt}
       onLoad={e => {
         onImageLoad(e);
@@ -20,7 +21,8 @@ const Image = React.forwardRef(function(props, ref) {
           onLoadRefresh();
         }
       }}
-      onError={e => {
+      onError={error => {
+        onImageError({error, src: imageSrc});
         if (imageIdx < imageArr.length) {
           imageErrorRef.current = true;
           setImageIdx(idx => idx + 1);
@@ -32,6 +34,7 @@ const Image = React.forwardRef(function(props, ref) {
 });
 
 Image.defaultProps = {
+  onImageError: utils.noop,
   onImageLoad: utils.noop,
   onLoadRefresh: utils.noop
 };
