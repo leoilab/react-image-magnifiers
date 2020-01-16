@@ -26,11 +26,12 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 var Image = _react["default"].forwardRef(function (props, ref) {
-  var onImageLoad = props.onImageLoad,
+  var onImageError = props.onImageError,
+      onImageLoad = props.onImageLoad,
       onLoadRefresh = props.onLoadRefresh,
       src = props.src,
       alt = props.alt,
-      otherProps = _objectWithoutProperties(props, ["onImageLoad", "onLoadRefresh", "src", "alt"]);
+      otherProps = _objectWithoutProperties(props, ["onImageError", "onImageLoad", "onLoadRefresh", "src", "alt"]);
 
   var _React$useState = _react["default"].useState(0),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -40,9 +41,10 @@ var Image = _react["default"].forwardRef(function (props, ref) {
   var imageErrorRef = _react["default"].useRef(false);
 
   var imageArr = src.constructor === Array ? src : [src];
+  var imageSrc = imageArr[imageIdx];
   return _react["default"].createElement("img", _extends({
     ref: ref,
-    src: imageArr[imageIdx],
+    src: imageSrc,
     alt: alt,
     onLoad: function onLoad(e) {
       onImageLoad(e);
@@ -51,7 +53,12 @@ var Image = _react["default"].forwardRef(function (props, ref) {
         onLoadRefresh();
       }
     },
-    onError: function onError(e) {
+    onError: function onError(error) {
+      onImageError({
+        error: error,
+        src: imageSrc
+      });
+
       if (imageIdx < imageArr.length) {
         imageErrorRef.current = true;
         setImageIdx(function (idx) {
@@ -63,6 +70,7 @@ var Image = _react["default"].forwardRef(function (props, ref) {
 });
 
 Image.defaultProps = {
+  onImageError: _utils["default"].noop,
   onImageLoad: _utils["default"].noop,
   onLoadRefresh: _utils["default"].noop
 };

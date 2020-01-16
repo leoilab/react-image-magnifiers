@@ -40,6 +40,7 @@ var SideBySideRenderer = function SideBySideRenderer(props) {
       transitionSpeedInPlace = props.transitionSpeedInPlace,
       renderOverlay = props.renderOverlay,
       cursorStyle = props.cursorStyle,
+      onImageError = props.onImageError,
       onImageLoad = props.onImageLoad,
       onLargeImageLoad = props.onLargeImageLoad,
       onLoadRefresh = props.onLoadRefresh;
@@ -97,6 +98,7 @@ var SideBySideRenderer = function SideBySideRenderer(props) {
     },
     src: imageSrc,
     alt: imageAlt,
+    onImageError: onImageError,
     onImageLoad: onImageLoad,
     onLoadRefresh: onLoadRefresh
   }), _react["default"].createElement("div", {

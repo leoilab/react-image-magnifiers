@@ -32,6 +32,7 @@ var SideBySideMagnifier = function SideBySideMagnifier(props) {
       renderOverlay = props.renderOverlay,
       className = props.className,
       style = props.style,
+      onImageError = props.onImageError,
       onImageLoad = props.onImageLoad,
       onLargeImageLoad = props.onLargeImageLoad;
   return _react["default"].createElement(_reactInputPosition["default"], {
@@ -52,6 +53,7 @@ var SideBySideMagnifier = function SideBySideMagnifier(props) {
     transitionSpeedInPlace: transitionSpeedInPlace,
     renderOverlay: renderOverlay,
     cursorStyle: cursorStyle,
+    onImageError: onImageError,
     onImageLoad: onImageLoad,
     onLargeImageLoad: onLargeImageLoad
   }));
@@ -70,6 +72,7 @@ SideBySideMagnifier.propTypes = {
   renderOverlay: _propTypes["default"].func,
   className: _propTypes["default"].string,
   style: _propTypes["default"].object,
+  onImageError: _propTypes["default"].func,
   onImageLoad: _propTypes["default"].func,
   onLargeImageLoad: _propTypes["default"].func
 };
@@ -82,6 +85,7 @@ SideBySideMagnifier.defaultProps = {
   cursorStyle: "crosshair",
   transitionSpeed: 0.4,
   transitionSpeedInPlace: 0.4,
+  onImageError: _utils["default"].noop,
   onImageLoad: _utils["default"].noop,
   onLargeImageLoad: _utils["default"].noop
 };
